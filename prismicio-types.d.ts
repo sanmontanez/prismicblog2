@@ -56,8 +56,7 @@ interface ArticleDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<ArticleDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<ArticleDocumentDataSlicesSlice> /**
    * Meta Title field in *Article*
    *
    * - **Field Type**: Text
@@ -181,6 +180,12 @@ type PageDocumentDataSlicesSlice =
   | TextSlice
   | ContactFormSlice;
 
+type PageDocumentDataSlices2Slice =
+  | ImageSlice
+  | ContactFormSlice
+  | TextSlice
+  | QuoteSlice;
+
 /**
  * Content for Page documents
  */
@@ -205,8 +210,7 @@ interface PageDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<PageDocumentDataSlicesSlice>
-  /**
+  slices: prismic.SliceZone<PageDocumentDataSlicesSlice> /**
    * Meta Title field in *Page*
    *
    * - **Field Type**: Text
@@ -237,7 +241,16 @@ interface PageDocumentData {
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  meta_image: prismic.ImageField<never>;
+  meta_image: prismic.ImageField<never> /**
+   * Slice Zone field in *Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.slices2[]
+   * - **Tab**: AB
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */;
+  slices2: prismic.SliceZone<PageDocumentDataSlices2Slice>;
 }
 
 /**
@@ -560,10 +573,14 @@ declare module "@prismicio/client" {
     export type {
       ArticleDocument,
       ArticleDocumentData,
+      ArticleDocumentDataSlicesSlice,
       NavigationDocument,
       NavigationDocumentData,
+      NavigationDocumentDataLinksItem,
       PageDocument,
       PageDocumentData,
+      PageDocumentDataSlicesSlice,
+      PageDocumentDataSlices2Slice,
       SettingsDocument,
       SettingsDocumentData,
       AllDocumentTypes,
@@ -571,13 +588,17 @@ declare module "@prismicio/client" {
       ContactFormSliceVariation,
       ContactFormSliceDefault,
       ImageSlice,
+      ImageSliceDefaultPrimary,
+      ImageSliceWidePrimary,
       ImageSliceVariation,
       ImageSliceDefault,
       ImageSliceWide,
       QuoteSlice,
+      QuoteSliceDefaultPrimary,
       QuoteSliceVariation,
       QuoteSliceDefault,
       TextSlice,
+      TextSliceDefaultPrimary,
       TextSliceVariation,
       TextSliceDefault,
     };
